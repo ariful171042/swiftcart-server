@@ -98,9 +98,30 @@ export const getAllProduct = TryCatch(async (req, res, next) => {
     const page = Number(req.query.page) || 1;
     const limit = Number(process.env.PRODUCT_PERPAGE) || 8;
     const skip = (page - 1) * limit;
-    const products = await Product.find({});
+    const baseQuery = {};
+    if (search)
+        baseQuery.name = {
+            $regex: search,
+            $options: "i",
+        };
+    if (price)
+        baseQuery.price = {
+            $lte: Number(price),
+        };
+    if (category)
+        baseQuery.category = category;
+    const productPromise = Product.find(baseQuery)
+        .sort(sort && { price: sort === "asc" ? 1 : -1 })
+        .limit(limit)
+        .skip(skip);
+    const [products, filteredOnlyProduct] = await Promise.all([
+        productPromise,
+        Product.find(baseQuery),
+    ]);
+    const totalPage = Math.ceil(products.length / limit);
     return res.status(200).json({
         status: true,
         products,
+        totalPage,
     });
 });
