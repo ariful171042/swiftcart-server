@@ -6,16 +6,24 @@ import NodeCache from "node-cache";
 //Importing Routes
 import userRoute from "./routes/user.js";
 import productRoute from "./routes/product.js";
+import orderRoute from "./routes/order.js";
+import { config } from "dotenv";
+import morgan from "morgan";
 
-const port = 4000;
+config({
+  path: "./.env",
+});
 
-connectDB();
+const port = process.env.PORT || 4000;
+const mongoURL = process.env.MONGO_URI || "";
+connectDB(mongoURL);
 
 export const myCache = new NodeCache();
 
 const app = express();
 
 app.use(express.json());
+app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   res.send("API Working with /api/v1");
@@ -24,7 +32,7 @@ app.get("/", (req, res) => {
 //Useing Route
 app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
-
+app.use("/api/product", orderRoute);
 app.use("uploads", express.static("uploads"));
 
 app.use(errorMiddleware);

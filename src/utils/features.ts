@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import { RevalidateCachesProps } from "../types/types.js";
+import { OrderItemType, RevalidateCachesProps } from "../types/types.js";
 import { myCache } from "../app.js";
 import { Product } from "../models/product.js";
 
-export const connectDB = () => {
+export const connectDB = (uri: string) => {
   mongoose
-    .connect("mongodb://127.0.0.1:27017/Swiftcart")
+    .connect(uri)
     .then((connection) => {
       console.log(`DB connected to ${connection.connection.host}`);
 
@@ -46,5 +46,17 @@ export const revalidateCache = async ({
   if (order) {
   }
   if (admin) {
+  }
+};
+
+export const reduceStock = async (orderItems: OrderItemType[]) => {
+  for (let i = 0; i < orderItems.length; i++) {
+    const order = orderItems[i];
+    const product = await Product.findById(order.productId);
+    if (!product) throw new Error("Product not Found");
+
+    product.stock -= order.quantity;
+
+    await product.save();
   }
 };
