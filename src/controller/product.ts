@@ -68,7 +68,7 @@ export const updateProduct = TryCatch(async (req, res, next) => {
 
   await product.save();
 
-  await revalidateCache({ product: true });
+  await revalidateCache({ product: true, productId: String(product._id) });
 
   return res
     .status(200)
@@ -155,7 +155,7 @@ export const deleteProduct = TryCatch(async (req, res, next) => {
 
   await product.deleteOne();
 
-  await revalidateCache({ product: true });
+  await revalidateCache({ product: true, productId: String(product._id) });
 
   return res
     .status(200)
