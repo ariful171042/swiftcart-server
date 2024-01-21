@@ -8,6 +8,7 @@ import userRoute from "./routes/user.js";
 import productRoute from "./routes/product.js";
 import orderRoute from "./routes/order.js";
 import paymentRoute from "./routes/payment.js";
+import dashboardRoute from "./routes/stats.js";
 import { config } from "dotenv";
 import morgan from "morgan";
 
@@ -16,7 +17,7 @@ config({
 });
 
 const port = process.env.PORT || 4000;
-const mongoURL = process.env.MONGO_URI || "";
+const mongoURL = process.env.MONGO_DB_URI || "";
 connectDB(mongoURL);
 
 export const myCache = new NodeCache();
@@ -35,6 +36,8 @@ app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
 app.use("/api/product", orderRoute);
 app.use("/api/payment", paymentRoute);
+app.use("/api/dashboard", dashboardRoute);
+
 app.use("uploads", express.static("uploads"));
 
 app.use(errorMiddleware);
