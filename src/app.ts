@@ -7,6 +7,7 @@ import NodeCache from "node-cache";
 import userRoute from "./routes/user.js";
 import productRoute from "./routes/product.js";
 import orderRoute from "./routes/order.js";
+import paymentRoute from "./routes/payment.js";
 import { config } from "dotenv";
 import morgan from "morgan";
 
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
 app.use("/api/product", orderRoute);
+app.use("/api/payment", paymentRoute);
 app.use("uploads", express.static("uploads"));
 
 app.use(errorMiddleware);
