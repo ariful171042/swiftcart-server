@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 //Useing Route
 app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
-app.use("/api/product", orderRoute);
+app.use("/api/order", orderRoute);
 app.use("/api/payment", paymentRoute);
 app.use("/api/dashboard", dashboardRoute);
 app.use("uploads", express.static("uploads"));

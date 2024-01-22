@@ -51,7 +51,7 @@ const schema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Processign", "Shipped", "Delivered"],
+      enum: ["Processing", "Shipped", "Delivered"],
       default: "Processing",
     },
 
@@ -61,7 +61,7 @@ const schema = new mongoose.Schema(
         photo: String,
         price: Number,
         quantity: Number,
-        ProductId: {
+        productId: {
           type: mongoose.Types.ObjectId,
           ref: "Product",
         },

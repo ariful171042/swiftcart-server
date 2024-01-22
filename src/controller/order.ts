@@ -75,17 +75,9 @@ export const newOrder = TryCatch(
       total,
     } = req.body;
 
-    if (
-      !shippingInfo ||
-      !orderItems ||
-      !user ||
-      !subtotal ||
-      !tax ||
-      !shippingCharges ||
-      !discount ||
-      !total
-    )
-      throw new ErrorHanler("Plase Enter All Fields", 400);
+    if (!shippingInfo || !orderItems || !user || !subtotal || !tax || !total) {
+      return next(new ErrorHanler("Please Enter All Fields", 400));
+    }
 
     const order = await Order.create({
       shippingInfo,
@@ -105,7 +97,7 @@ export const newOrder = TryCatch(
       order: true,
       admin: true,
       userId: user,
-      productId: order.orderItems.map((i) => String(i.ProductId)),
+      productId: order.orderItems.map((i) => String(i.productId)),
     });
 
     return res.status(201).json({
@@ -123,7 +115,7 @@ export const processOrder = TryCatch(async (req, res, next) => {
   if (!order) return next(new ErrorHanler("Order not Found", 404));
 
   switch (order.status) {
-    case "Processign":
+    case "Processing":
       order.status = "Shipped";
       break;
     case "Shipped":
