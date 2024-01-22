@@ -89,10 +89,10 @@ export const processOrder = TryCatch(async (req, res, next) => {
     if (!order)
         return next(new ErrorHanler("Order not Found", 404));
     switch (order.status) {
-        case "processign":
-            order.status = "shipped";
+        case "Processign":
+            order.status = "Shipped";
             break;
-        case "shipped":
+        case "Shipped":
             order.status = "Delivered";
             break;
         default:
