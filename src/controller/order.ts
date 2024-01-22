@@ -100,7 +100,7 @@ export const newOrder = TryCatch(
 
     await reduceStock(orderItems);
 
-    await revalidateCache({
+    revalidateCache({
       product: true,
       order: true,
       admin: true,
@@ -137,7 +137,7 @@ export const processOrder = TryCatch(async (req, res, next) => {
 
   await order.save();
 
-  await revalidateCache({
+  revalidateCache({
     product: false,
     order: true,
     admin: true,
@@ -160,7 +160,7 @@ export const deleteOrder = TryCatch(async (req, res, next) => {
 
   await order.deleteOne();
 
-  await revalidateCache({
+  revalidateCache({
     product: false,
     order: true,
     admin: true,
@@ -170,6 +170,6 @@ export const deleteOrder = TryCatch(async (req, res, next) => {
 
   return res.status(200).json({
     success: true,
-    message: "Order Processed Successfully",
+    message: "Order Deleted Successfully",
   });
 });
