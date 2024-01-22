@@ -10,12 +10,15 @@ import paymentRoute from "./routes/payment.js";
 import dashboardRoute from "./routes/stats.js";
 import { config } from "dotenv";
 import morgan from "morgan";
+import Stripe from "stripe";
 config({
     path: "./.env",
 });
 const port = process.env.PORT || 4000;
 const mongoURL = process.env.MONGO_DB_URI || "";
+const stripeKey = process.env.STRIPE_KEY || "";
 connectDB(mongoURL);
+export const stripe = new Stripe(stripeKey);
 export const myCache = new NodeCache();
 const app = express();
 app.use(express.json());
