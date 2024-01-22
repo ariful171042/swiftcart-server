@@ -61,7 +61,7 @@ export type ShippingInfoType = {
   city: string;
   country: string;
   state: string;
-  pinCode: number;
+  pincode: number;
 };
 
 export interface NewOrderRequestBody {

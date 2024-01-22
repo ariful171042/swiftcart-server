@@ -7,6 +7,6 @@ app.post("/create", createPaymentIntent);
 app.get("/discount", applyDiscount);
 //route - /api/payment/coupon/new
 app.post("/coupon/new", adminOnly, newCoupon);
-app.get("coupon/all", adminOnly, allCoupons);
+app.get("/coupon/all", adminOnly, allCoupons);
 app.delete("/coupon/:id", adminOnly, deleteCoupon);
 export default app;
