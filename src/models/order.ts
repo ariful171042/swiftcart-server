@@ -51,7 +51,7 @@ const schema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["processign", "shipped", "Delivered"],
+      enum: ["Processign", "Shipped", "Delivered"],
       default: "Processing",
     },
 
