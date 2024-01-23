@@ -2,6 +2,7 @@ import express from "express";
 import { connectDB } from "./utils/features.js";
 import { errorMiddleware } from "./middlewares/error.js";
 import NodeCache from "node-cache";
+import cors from "cors";
 
 //Importing Routes
 import userRoute from "./routes/user.js";
@@ -29,9 +30,10 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("API Working with /api/v1");
+  res.send("SwiptCart API Working with /api/");
 });
 
 //Useing Route
@@ -46,5 +48,5 @@ app.use("uploads", express.static("uploads"));
 app.use(errorMiddleware);
 
 app.listen(port, () => {
-  console.log(`server is working on http://localhost:${port}`);
+  console.log(`server is working Now`);
 });
