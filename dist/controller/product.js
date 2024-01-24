@@ -15,7 +15,7 @@ export const newProduct = TryCatch(async (req, res, next) => {
         });
         return next(new ErrorHanler("Please Enter All Fields", 400));
     }
-    const product = await Product.create({
+    await Product.create({
         name,
         price,
         stock,

@@ -34,7 +34,7 @@ app.use("/api/product", productRoute);
 app.use("/api/order", orderRoute);
 app.use("/api/payment", paymentRoute);
 app.use("/api/dashboard", dashboardRoute);
-app.use("uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
 app.use(errorMiddleware);
 app.listen(port, () => {
     console.log(`server is working Now`);
