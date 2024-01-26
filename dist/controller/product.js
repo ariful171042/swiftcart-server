@@ -30,15 +30,15 @@ export const newProduct = TryCatch(async (req, res, next) => {
 });
 //Update Product
 export const updateProduct = TryCatch(async (req, res, next) => {
-    const id = req.params.id;
-    const { name, category, price, stock } = req.body;
+    const { id } = req.params;
+    const { name, price, stock, category } = req.body;
     const photo = req.file;
     const product = await Product.findById(id);
     if (!product)
-        return next(new ErrorHanler("Product not Found", 404));
+        return next(new ErrorHanler("Product Not Found", 404));
     if (photo) {
         rm(product.photo, () => {
-            console.log("Old photo Deleted");
+            console.log("Old Photo Deleted");
         });
         product.photo = photo.path;
     }
@@ -56,9 +56,11 @@ export const updateProduct = TryCatch(async (req, res, next) => {
         productId: String(product._id),
         admin: true,
     });
-    return res
-        .status(200)
-        .json({ success: true, message: "Product Updated Successfully" });
+    return res.status(200).json({
+        success: true,
+        message: "Product Updated Successfully",
+        product,
+    });
 });
 //get a product
 export const getProduct = TryCatch(async (req, res, next) => {

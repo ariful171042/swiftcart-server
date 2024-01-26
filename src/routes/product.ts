@@ -33,11 +33,9 @@ app.get("/category", getCategoryPRoducts);
 //get latest Product
 app.get("/admin/products", adminOnly, getAdminProducts);
 
+app.put("/update/:id", adminOnly, updateProduct);
+
 //Delete Product
-app
-  .route("/:id")
-  .get(getProduct)
-  .put(adminOnly, updateProduct)
-  .delete(adminOnly, deleteProduct);
+app.route("/:id").get(getProduct).delete(adminOnly, deleteProduct);
 
 export default app;
