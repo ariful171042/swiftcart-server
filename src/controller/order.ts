@@ -15,7 +15,7 @@ export const myOrders = TryCatch(async (req, res, next) => {
 
   if (myCache.has(key)) orders = JSON.parse(myCache.get(key) as string);
   else {
-    orders = await Order.find({ user });
+    orders = await Order.find({ user }).sort({ createdAt: -1 });
     myCache.set("", JSON.stringify(orders));
   }
 

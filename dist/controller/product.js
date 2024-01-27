@@ -107,7 +107,7 @@ export const getAdminProducts = TryCatch(async (req, res, next) => {
     if (myCache.has("all-products"))
         products = JSON.parse(myCache.get("all-products"));
     else {
-        products = await Product.find({});
+        products = await Product.find({}).sort({ createdAt: -1 });
         myCache.set("all-products", JSON.stringify(products));
     }
     return res.status(200).json({ success: true, products });

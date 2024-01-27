@@ -1,7 +1,7 @@
 import mongoose, { Document } from "mongoose";
-import { OrderItemType, RevalidateCachesProps } from "../types/types.js";
 import { myCache } from "../app.js";
 import { Product } from "../models/product.js";
+import { OrderItemType, RevalidateCachesProps } from "../types/types.js";
 
 export const connectDB = (uri: string) => {
   mongoose
