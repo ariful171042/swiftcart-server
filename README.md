@@ -27,15 +27,14 @@ Before running the application, ensure you have the following installed:
    ```bash
    git clone https://github.com/yourusername/swiftcart.git
 Navigate to the project directory:
-
-```bash
 Copy code
+```bash
 cd swiftcart
-Install the dependencies:
 ```
+Install the dependencies:
 
-```bash
 Copy code
+```bash
 npm install
 ```
 #Create a .env file in the root directory and add the following environment variables:
@@ -49,8 +48,8 @@ STRIPE_KEY=your_stripe_api_key
 Running the Application
 Start the server with the following command:
 
-```bash
 Copy code
+```bash
 npm run start
 ```
 #The server will be running at http://localhost:4000.
