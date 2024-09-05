@@ -33,14 +33,13 @@ cd swiftcart
 ```
 Install the dependencies:
 
-Copy code
+
 ```bash
 npm install
 ```
 #Create a .env file in the root directory and add the following environment variables:
 
 ```bash
-Copy code
 PORT=4000
 MONGO_DB_URI=your_mongo_db_uri
 STRIPE_KEY=your_stripe_api_key
@@ -48,7 +47,6 @@ STRIPE_KEY=your_stripe_api_key
 Running the Application
 Start the server with the following command:
 
-Copy code
 ```bash
 npm run start
 ```
